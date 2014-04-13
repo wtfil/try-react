@@ -12,9 +12,10 @@
         "koa": "*",
         "react": "*",
         "backbone": "*",
-        "browserify": "*",
+        "pure-cjs": "*",
         "mime": "*",
         "through": "*",
+        "thunkify": "*",
         "react-tools": "*"
 
     },

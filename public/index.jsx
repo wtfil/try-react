@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
-var Exoskeleton = require('backbone'),
-	React = require('react');
+var Exoskeleton = require('backbone');
+
 
 var TodoItemModel = Exoskeleton.Model.extend({
 
