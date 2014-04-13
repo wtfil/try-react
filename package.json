@@ -1,0 +1,21 @@
+{
+    "name": "try-react",
+    "version": "0.0.1",
+    "description": "react todo",
+    "author": {
+        "name": "Evgeniy Filatov"
+    },
+    "scripts": {
+        "start": "node --harmony app.js"
+    },
+    "dependencies": {
+        "koa": "*",
+        "react": "*",
+        "exoskeleton": "*",
+        "browserify": "*"
+    },
+    "main": "index",
+    "engines": {
+        "node": ">= 0.8.0"
+    }
+}
