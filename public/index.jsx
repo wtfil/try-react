@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+var Exoskeleton = require('backbone'),
+	React = require('react');
 
 var TodoItemModel = Exoskeleton.Model.extend({
 
@@ -86,7 +88,9 @@ var Todo = React.createClass({
 	}
 });
 
-React.renderComponent(
-	<Todo/>,
-	document.querySelector('.app')
-);
+window.addEventListener('load', function () {
+	React.renderComponent(
+		<Todo/>,
+		document.querySelector('.app')
+	);
+}, false);

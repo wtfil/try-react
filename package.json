@@ -11,8 +11,12 @@
     "dependencies": {
         "koa": "*",
         "react": "*",
-        "exoskeleton": "*",
-        "browserify": "*"
+        "backbone": "*",
+        "browserify": "*",
+        "mime": "*",
+        "through": "*",
+        "react-tools": "*"
+
     },
     "main": "index",
     "engines": {
