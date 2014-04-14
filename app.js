@@ -12,8 +12,10 @@ app.use(function* (next) {
 		return yield next;
 	}
 	var filename = '.' + this.originalUrl;
+	/*
 	var compiled = yield cjs.transform({
 		input: filename,
+		dryRun: true,
 		transform: function () {
 			var data = '';
 			return through(write, end);
@@ -23,7 +25,8 @@ app.use(function* (next) {
 				try {
 					code = transform(data);
 				} catch (err) {
-					console.error(err);
+					console.error(err.stack);
+					code = 'console.error(' + err.stack + ')';
 				}
 				this.queue(code);
 				this.queue(null);
@@ -31,8 +34,32 @@ app.use(function* (next) {
 			
 		}
 	});
-
 	this.body = compiled.code;
+	*/
+	var b = require('browserify')();
+	b.add(filename);
+	b.transform(function () {
+		var data = '';
+		return through(write, end);
+		function write(chunk) {data += chunk};
+		function end() {
+			var code;
+			if (~data.indexOf('/** @jsx React.DOM */')) {
+				try {
+					code = transform(data);
+				} catch (err) {
+					console.error(err.stack);
+					code = 'console.error(' + err.stack + ')';
+				}
+			} else {
+				code = data;
+			}
+			this.queue(code);
+			this.queue(null);
+		}
+	});
+	this.body = yield require('thunkify')(b.bundle.bind(b));
+
 });
 
 app.use(function* (next) {

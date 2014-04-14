@@ -16,7 +16,8 @@
         "mime": "*",
         "through": "*",
         "thunkify": "*",
-        "react-tools": "*"
+        "react-tools": "*",
+        "browserify": "*"
 
     },
     "main": "index",

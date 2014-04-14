@@ -1,0 +1,36 @@
+.todo-item
+{
+	float: left;
+	clear: both;
+}
+.todo-item.done
+{
+	text-transform: underline;
+}
+.todo-item input,
+.todo button
+{
+	font-size: 14px;
+	color: #555;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 6px 12px;
+	outline: none;
+}
+
+.todo button:active
+{
+	padding: 7px 12px 5px;
+}
+
+.todo__list
+{
+	overflow: hidden;
+}
+
+.todo__done
+{
+	color: #555;
+	font-size: 14px;
+	padding: 0 4px;
+}

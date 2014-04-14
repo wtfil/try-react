@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
-var Exoskeleton = require('backbone');
-
+var Exoskeleton = require('backbone'),
+	React = require('react');
 
 var TodoItemModel = Exoskeleton.Model.extend({
 
@@ -30,9 +30,12 @@ var TodoCollection = Exoskeleton.Collection.extend({
 
 
 var ModelComponent = {
+	_update: function () {
+		// calling without params
+		this.forceUpdate();
+	},
 	componentWillMount: function () {
 		this._model = this._model || this.props.model;
-		this._update = this.forceUpdate.bind(this, null);
 		this._model.on('change', this._update, this)
 	},
 
@@ -44,9 +47,14 @@ var ModelComponent = {
 var TodoItem = React.createClass({
 	mixins: [ModelComponent],
 	render: function () {
-		var p = this._model.toJSON();
+		var p = this._model.toJSON(),
+			className = ['todo-item'];
+
+		if (p.done) {
+			className.push('done');
+		}
 			
-		return <div>
+		return <div className={className.join(' ')}>
 			<input type="text" value={p.target}/>
 			<input type="text" value={p.date}/>
 			<input onChange={this._onChange} type="checkbox" checked={p.done}/>
@@ -81,8 +89,8 @@ var Todo = React.createClass({
 		}, this);
 
 		return <div>
-			<span>{this._model.done()}</span>
-			<div class="todo__list"> {list}</div>
+			<span className="todo__done">Done: {this._model.done()}</span>
+			<div className="todo__list"> {list}</div>
 			<button onClick={this._onClick}>Add more</button>
 		</div>;
 	}
@@ -91,6 +99,6 @@ var Todo = React.createClass({
 window.addEventListener('load', function () {
 	React.renderComponent(
 		<Todo/>,
-		document.querySelector('.app')
+		document.querySelector('.todo')
 	);
 }, false);
