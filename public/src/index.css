@@ -2,10 +2,18 @@
 {
 	float: left;
 	clear: both;
+	position: relative;
+	margin-bottom: 5px;
 }
-.todo-item.done
+.todo-item.done:after
 {
-	text-transform: underline;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	right: 22px;
+	height: 1px;
+	background: #aaa;
 }
 .todo-item input,
 .todo button
