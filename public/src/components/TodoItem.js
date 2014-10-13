@@ -4,22 +4,24 @@ var ModelMixin = require('../utils/ModelMixin');
 
 var TodoItem = React.createClass({
 	mixins: [ModelMixin],
-	render: function () {
-		var p = this._model.toJSON(),
-			className = ['todo-item'];
 
-		if (p.done) {
+	render: function () {
+		var className = ['todo-item'];
+		var done = this.model.get('done');
+
+		if (done) {
 			className.push('done');
 		}
 
 		return <div className={className.join(' ')}>
-			<input type="text" value={p.target}/>
-			<input type="text" value={p.date}/>
-			<input onChange={this._onChange} type="checkbox" checked={p.done}/>
+			<input type="text" value={this.model.get('description')}/>
+			<input type="text" value={this.model.get('date')}/>
+			<input onChange={this.onChange} type="checkbox" checked={done}/>
 		</div>;
 	},
-	_onChange: function () {
-		this._model.toggle();
+
+	onChange: function () {
+		this.model.toggle();
 	}
 });
 

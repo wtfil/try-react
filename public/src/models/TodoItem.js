@@ -3,8 +3,8 @@ var Backbone = require('backbone');
 var TodoItem = Backbone.Model.extend({
 
 	defaults: {
-		target: '',
-		date: Date.now() + 24 * 3600 * 1000,
+		description: '',
+		date: (new Date()).toDateString(),
 		done: false
 	},
 

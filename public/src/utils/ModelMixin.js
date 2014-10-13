@@ -1,17 +1,18 @@
 var ModelMixin = {
-	_update: function () {
-		console.log('update');
-		// calling without params
+
+	update: function () {
 		this.forceUpdate();
 	},
+
 	componentWillMount: function () {
-		this._model = this._model || this.props.model;
-		this._model.on('change', this._update, this);
+		this.model = this.model || this.props.model;
+		this.model.on('change add remove', this.update, this);
 	},
 
 	componentWillUnmoun: function () {
-		this._model.off(null, this._update, this);
+		this.model.off(null, this.update, this);
 	}
+
 };
 
 module.exports = ModelMixin;

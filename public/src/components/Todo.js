@@ -6,31 +6,27 @@ var TodoItem = require('./TodoItem');
 
 var Todo = React.createClass({
 	mixins: [ModelMixin],
-	getInitialState: function() {
-		return {
-			list: [
-				{target: 'olo', date: 2},
-				{target: 'asdolo', date: 3}
-			]
-		};
+
+	onClick: function () {
+		this.model.add({});
+		console.log(this.model);
 	},
 
-	_onClick: function () {
-		this.setState({state: this.state.list.push({})});
-	},
 	render: function () {
-		var list = this.state.list.map(function (item) {
-			var model = new TodoItemModel(item);
-			this._model.add(model);
-			return <TodoItem model={model}/>;
-		}, this);
 
 		return <div>
-			<span className="todo__done">Done: {this._model.done()}</span>
-			<div className="todo__list"> {list}</div>
-			<button onClick={this._onClick}>Add more</button>
+			<span className="todo__done">Done: {this.model.done()} (of {this.model.length})</span>
+
+			<div className="todo__list">
+				{this.model.map(function (model) {
+					return <TodoItem model={model}/>;
+				})}
+			</div>
+
+			<button onClick={this.onClick}>Add more</button>
 		</div>;
 	}
+
 });
 
 module.exports = Todo;
